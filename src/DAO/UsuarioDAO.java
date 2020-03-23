@@ -4,28 +4,24 @@
  * and open the template in the editor.
  */
 package DAO;
-
-import GUI.Inscripcion;
-
-
 import util.CaException;
 import util.ServiceLocator;
 import java.sql.*;
+
+import negocio.Usuario;
 
 /**
  *
  * @author vanRz
  */
-public class InscripcionDAO {
+public class UsuarioDAO {
     
-    Inscripcion ins;
+    Usuario usu;
 
-    public InscripcionDAO() {
+    public UsuarioDAO() {
         
-        ins=new Inscripcion();
+        usu= new Usuario();
     }
-    
-    
     
     
 }

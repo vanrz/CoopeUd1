@@ -7,7 +7,7 @@ package DAO;
 
 import negocio.Proveedor;
 
-import negocio.Asociado;
+
 import util.CaException;
 import util.ServiceLocator;
 import java.sql.*;

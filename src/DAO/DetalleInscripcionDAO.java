@@ -5,9 +5,9 @@
  */
 package DAO;
 
-import GUI.Inscripcion;
 
-import negocio.Asociado;
+
+
 import util.CaException;
 import util.ServiceLocator;
 import java.sql.*;
