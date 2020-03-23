@@ -19,7 +19,8 @@ public class Evento {
     private String f_maxins;
     private String f_maxcancel;
     private String f_cierre;
-    private String i_tie;
+    private String i_tieneins;
+    private int v_total;
     private String n_lugar ;
     private String n_descripcion ;
     private String n_nombre;
@@ -90,12 +91,12 @@ public class Evento {
         this.f_cierre = f_cierre;
     }
 
-    public String getI_tie() {
-        return i_tie;
+    public String getI_tieneins() {
+        return i_tieneins;
     }
 
-    public void setI_tie(String i_tie) {
-        this.i_tie = i_tie;
+    public void setI_tieneins(String i_tie) {
+        this.i_tieneins = i_tie;
     }
 
     public String getN_lugar() {
@@ -137,6 +138,15 @@ public class Evento {
     public void setQ_maxpart(int q_maxpart) {
         this.q_maxpart = q_maxpart;
     }
+
+    public int getV_total() {
+        return v_total;
+    }
+
+    public void setV_total(int v_total) {
+        this.v_total = v_total;
+    }
+    
     
     
 }

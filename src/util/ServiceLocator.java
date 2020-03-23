@@ -44,7 +44,7 @@ public class ServiceLocator {
 
     private ServiceLocator() throws Exception {
         try {
-            String url = "jdbc:postgresql://localhost:5432/coopeud";
+            String url = "jdbc:postgresql://localhost:5432/CoopeUD";
             String usuario = "postgres";
             String password = "1585";
             Class.forName("org.postgresql.Driver").newInstance();
