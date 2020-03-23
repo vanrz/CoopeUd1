@@ -24,7 +24,7 @@ public class AsociadoDAO {
 
     public void buscarAsociado() throws CaException {
         try {
-            String stringSQL = "SELECT * FROM asociado WHERE k_persona = ?";//busqueda en sql
+            String stringSQL = "SELECT * FROM Asociado WHERE k_persona = ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
 
@@ -59,7 +59,7 @@ public class AsociadoDAO {
 
     public void AñadirAsociado() throws CaException {
         try {
-            String stringSQL = "INSERT INTO asociado VALUES (?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE)";
+            String stringSQL = "INSERT INTO Asociado VALUES (?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 

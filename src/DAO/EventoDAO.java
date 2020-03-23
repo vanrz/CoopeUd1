@@ -26,7 +26,7 @@ public class EventoDAO {
 
     public void AñadirEvento() throws CaException {
         try {
-            String stringSQL = "INSERT INTO evento VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String stringSQL = "INSERT INTO Evento VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -56,7 +56,7 @@ public class EventoDAO {
 
     public void buscarEvento() throws CaException {
         try {
-            String stringSQL = "SELECT * FROM evento WHERE k_evento = ?";//busqueda en sql
+            String stringSQL = "SELECT * FROM Evento WHERE k_evento = ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
 
@@ -98,7 +98,7 @@ public class EventoDAO {
 
     public void borrarEvento() throws CaException {
         try {
-            String stringSQL = "DELETE FROM evento WHERE k_evento= ?";//busqueda en sql
+            String stringSQL = "DELETE FROM Evento WHERE k_evento= ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
 

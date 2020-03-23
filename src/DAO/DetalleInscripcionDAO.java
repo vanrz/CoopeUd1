@@ -28,7 +28,7 @@ public class DetalleInscripcionDAO {
     
     public void AñadirDetalleIns() throws CaException {
         try {
-            String stringSQL = "INSERT INTO detalle_inscripcion VALUES (?,?,?)";
+            String stringSQL = "INSERT INTO DetalleInscripcion VALUES (?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -46,7 +46,7 @@ public class DetalleInscripcionDAO {
 
     public void buscarDetalleIns() throws CaException {
         try {
-            String stringSQL = "SELECT * FROM detalle_inscripcion WHERE k_identificacion= ?";//busqueda en sql
+            String stringSQL = "SELECT * FROM DetalleInscripcion WHERE k_identificacion= ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
 
@@ -71,7 +71,7 @@ public class DetalleInscripcionDAO {
 
     public void borrarDetalleIns() throws CaException {
         try {
-            String stringSQL = "DELETE FROM detalle_inscripcion WHERE k_identificacion= ?";//busqueda en sql
+            String stringSQL = "DELETE FROM DetalleInscripcion WHERE k_identificacion= ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
             

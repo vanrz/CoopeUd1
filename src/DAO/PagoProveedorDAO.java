@@ -21,7 +21,25 @@ public class PagoProveedorDAO {
         pagProv= new PagoProveedor();
     }
     
-    //agregar,actualizar
+
     
+    public void AñadirPagoProveedor() throws CaException{
+          try {
+            String stringSQL = "INSERT INTO pagoProveedor VALUES (?,?,?,?)";
+            Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
+            PreparedStatement prepSta = conex.prepareStatement(stringSQL);
+            
+            prepSta.setInt(1, pagProv.getK_idpagoprovee());
+            prepSta.setString(2, pagProv.getF_pagoprovee());//yyyy-mm-dd
+            prepSta.setString(3, pagProv.getO_formapagoprovee());
+            prepSta.setInt(4, pagProv.getK_rut());
+            
+         } catch (SQLException e) {
+            throw new CaException("PagoProveedorDAO", "No se creó el pago al proveedor" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
     
+          //falta actualizar que se actualiza?
 }

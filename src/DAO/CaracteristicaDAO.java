@@ -25,7 +25,7 @@ public class CaracteristicaDAO {
     }
     public void buscarCaracteristica() throws CaException {
         try {
-            String stringSQL = "SELECT * FROM caracteristica WHERE k_evento = ?";//busqueda en sql
+            String stringSQL = "SELECT * FROM Caracteristica WHERE k_evento = ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
 
