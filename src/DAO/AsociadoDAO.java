@@ -20,7 +20,7 @@ public class AsociadoDAO {
 
     public AsociadoDAO() {
         aso = new Asociado();
-    }
+    }//
 
     public void buscarAsociado() throws CaException {
         try {
