@@ -23,6 +23,7 @@ public class PagoInscripcionDAO {
         pagIns=new PagoInscripcion();
     }
     
+    //agregar,actualizar 
     
     
 }

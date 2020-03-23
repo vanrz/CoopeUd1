@@ -21,5 +21,7 @@ public class PagoProveedorDAO {
         pagProv= new PagoProveedor();
     }
     
+    //agregar,actualizar
+    
     
 }

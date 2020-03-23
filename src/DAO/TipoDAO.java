@@ -23,6 +23,7 @@ public class TipoDAO {
     public TipoDAO() {
         tip= new Tipo();
     }
+    //agregar,eliminar
     
     
     

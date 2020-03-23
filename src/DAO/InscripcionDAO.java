@@ -24,7 +24,7 @@ public class InscripcionDAO {
         
         ins=new Inscripcion();
     }
-    
+    //agregar,eliminar, buscar,actualizar
     
     
     

@@ -23,6 +23,7 @@ public class ProveedorDAO {
         prov=new Proveedor();
     }
     
+    //agregar, eliminar 
     
     
 }

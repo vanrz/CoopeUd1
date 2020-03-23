@@ -22,6 +22,7 @@ public class FamiliarDAO {
         
         fam=new Familiar();
     }
+    //agregar, eliminar, buscar 
     
     
     
