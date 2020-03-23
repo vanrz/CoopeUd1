@@ -41,5 +41,4 @@ public class PagoProveedorDAO {
         }
     }
     
-          //falta actualizar que se actualiza?
 }

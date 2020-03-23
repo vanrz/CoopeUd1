@@ -93,6 +93,5 @@ public class InscripcionDAO {
         }
     }
     
-    //falta actualizar que se actualiza?
 
 }

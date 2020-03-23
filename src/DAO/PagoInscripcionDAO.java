@@ -27,7 +27,7 @@ public class PagoInscripcionDAO {
 
     public void AñadirPagoInscripcion() throws CaException {
         try {
-            String stringSQL = "INSERT INTO evento VALUES (?,?,?,?,?)";
+            String stringSQL = "INSERT INTO PagoInscripcion VALUES (?,?,?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
             
@@ -45,5 +45,26 @@ public class PagoInscripcionDAO {
     }
     
     
-        //falta actualizar que se actualiza?
+        //falta actualizar que se actualiza? valor de pago
+    
+    public void ActualizarPagoInscripcion() throws CaException{
+        
+         try {
+            String stringSQL = "UPDATE PagoInscripcion SET v_pago = ? WHERE k_pago= ? ";
+            Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
+            PreparedStatement prepSta = conex.prepareStatement(stringSQL);
+            
+            prepSta.setInt(1, pagIns.getV_pago());
+            prepSta.setInt(2, pagIns.getK_ins());
+            
+            prepSta.executeUpdate();
+            prepSta.close();
+            ServiceLocator.getInstance().commit();
+            
+        }catch (SQLException e) {
+            throw new CaException("PagoInscripcionDAO", "No se actualizo el pago de la inscripcion" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
 }

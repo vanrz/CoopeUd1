@@ -85,7 +85,7 @@ public class AsociadoDAO {
     public void ActualizarAsociado() throws CaException {
 
         try {
-            String stringSQL = "UPDATE asociado SET o_tel = ? WHERE k_persona= ? ";
+            String stringSQL = "UPDATE Asociado SET o_tel = ? WHERE k_persona= ? ";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
             
@@ -97,7 +97,7 @@ public class AsociadoDAO {
             ServiceLocator.getInstance().commit();
             
         }catch (SQLException e) {
-            throw new CaException("AsociadoDAO", "No se creó el usuario" + e.getMessage());
+            throw new CaException("AsociadoDAO", "No se actualizo el usuario" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
