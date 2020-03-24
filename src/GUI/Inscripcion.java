@@ -5,12 +5,18 @@
  */
 package GUI;
 
+import DAO.EventoDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import util.CaException;
+
 /**
  *
  * @author vanRz
  */
 public class Inscripcion extends javax.swing.JFrame {
     InscribbirFamiliar iFamiliar=new InscribbirFamiliar();
+    EventoDAO evdao= new EventoDAO();
     /**
      * Creates new form Inscripcion1
      */
@@ -18,6 +24,13 @@ public class Inscripcion extends javax.swing.JFrame {
         super("Inscripcion a Evento");
         initComponents();
         setLocationRelativeTo(null);
+        
+        try {
+            tablita.setModel(evdao.mostrarEventos());
+        } catch (CaException ex) {
+            Logger.getLogger(Inscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**

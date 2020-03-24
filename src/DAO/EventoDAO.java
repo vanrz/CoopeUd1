@@ -10,6 +10,11 @@ import negocio.Evento;
 import util.CaException;
 import util.ServiceLocator;
 import java.sql.*;
+import java.util.ArrayList;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,7 +22,17 @@ import java.sql.*;
  */
 public class EventoDAO {
 
-    Evento evt;
+    private Evento evt;
+    
+    private DefaultTableModel modelo;
+
+    public Evento getEvt() {
+        return evt;
+    }
+
+    public void setEvt(Evento evt) {
+        this.evt = evt;
+    }
 
     public EventoDAO() {
 
@@ -26,7 +41,7 @@ public class EventoDAO {
 
     public void AñadirEvento() throws CaException {
         try {
-            String stringSQL = "INSERT INTO Evento VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String stringSQL = "INSERT INTO \"Evento\" (k_evento, i_estado, i_sobrecupo, f_inicio, f_fin, f_maxins, f_maxcancel, f_cierre, i_tieneins, v_total, n_lugar, n_descripcion, n_nombre, o_observaciones, q_maxpart) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -45,6 +60,10 @@ public class EventoDAO {
             prepSta.setString(13, evt.getN_nombre());
             prepSta.setString(14, evt.getO_observaciones());
             prepSta.setInt(15, evt.getQ_maxpart());
+            
+            prepSta.executeUpdate();
+            prepSta.close();
+            ServiceLocator.getInstance().commit();
 
         } catch (SQLException e) {
             throw new CaException("EventoDAO", "No se creó el evento" + e.getMessage());
@@ -52,6 +71,75 @@ public class EventoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
 
+    }
+    
+    public DefaultTableModel mostrarEventos() throws CaException {
+        
+        ArrayList <Integer> inscritos= new ArrayList<Integer>();
+        ArrayList <Integer> k_evento= new ArrayList<Integer>();
+        inscritos.add(0);
+        k_evento.add(0);
+        
+            String datos[]= new String[6];
+            modelo= new DefaultTableModel();
+            modelo.addColumn("codigo");
+            modelo.addColumn("nombre");
+            modelo.addColumn("cupos dis");
+            modelo.addColumn("tipo");
+            modelo.addColumn("fecha");
+            modelo.addColumn("valor");
+            
+            
+       
+        try {
+            String stringSQL = "SELECT \"Evento\".k_evento, COUNT(k_ins)  FROM \"Evento\", \"Inscripcion\" WHERE \"Evento\".k_evento = \"Inscripcion\".k_evento AND \"Inscripcion\".i_estado='S' GROUP BY \"Evento\".k_evento";//busqueda en sql
+            Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
+            PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
+
+            ResultSet resultado = prepSta.executeQuery();//ejecuta el query y guarda el resultado
+                 
+            while (resultado.next()) {
+                k_evento.add(Integer.parseInt(resultado.getString(1)));
+                inscritos.add(Integer.parseInt(resultado.getString(2)));
+            }
+
+        } catch (SQLException e) {
+            throw new CaException("EventoDAO", "No se encontró el evento" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }  
+        
+        int cont=0;
+        try {
+            String stringSQL1= "SELECT \"Evento\".k_evento, \"Evento\".n_nombre, q_maxpart, \"Tipo\".n_nombre, f_fin, ((v_total/q_maxpart)*(1-(p_pago/100)))  FROM  \"Evento\", \"Caracteristica\", \"Tipo\" WHERE  \"Evento\".k_evento=\"Caracteristica\".k_evento AND \"Evento\".k_evento=\"Tipo\".k_evento";
+            Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
+            PreparedStatement prepSta = conex.prepareStatement(stringSQL1);
+             ResultSet resultado = prepSta.executeQuery();//ejecuta el query y guarda el resultado
+             
+             while(resultado.next()){
+                 datos[0]= resultado.getString(1);
+                 datos[1]= resultado.getString(2);
+                 do{
+                     if(k_evento.get(cont)==Integer.parseInt(resultado.getString(1)))
+                         datos[2]= (Integer.parseInt(resultado.getString(3))-inscritos.get(cont)+"");
+                     else
+                         datos[2]= resultado.getString(3);
+                      cont++;
+                 }while(k_evento.size()>cont);            
+                 
+                 datos[3]= resultado.getString(4);
+                 datos[4]= resultado.getString(5);
+                 datos[5]=resultado.getString(6);
+                 cont++;
+                 modelo.addRow(datos);
+             }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       
+        return modelo;
     }
 
     public void buscarEvento() throws CaException {

@@ -11,7 +11,7 @@ package GUI;
  */
 public class MenuAso extends javax.swing.JFrame {
     misEventos miEvento;
-     //ConsultaInscripciones misInsc=new ConsultaInscripciones();
+     ConsultaInscripciones misInsc;
     Inscripcion eventoInscribirme;
     /**
      * Creates new form MenuAso1
@@ -39,7 +39,7 @@ public class MenuAso extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         eventos = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        cins = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,10 +70,10 @@ public class MenuAso extends javax.swing.JFrame {
 
         jButton4.setText("Cerrar Sesion");
 
-        jButton5.setText("Consultar Inscripciones");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        cins.setText("Consultar Inscripciones");
+        cins.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                cinsActionPerformed(evt);
             }
         });
 
@@ -103,7 +103,7 @@ public class MenuAso extends javax.swing.JFrame {
                             .addComponent(jLabel4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(jButton5))
+                        .addComponent(cins))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -127,7 +127,7 @@ public class MenuAso extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eventos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(cins)
                 .addGap(28, 28, 28)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -142,10 +142,11 @@ public class MenuAso extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-      //misInsc.setVisible(true);
+    private void cinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinsActionPerformed
+      misInsc=new ConsultaInscripciones();
+        misInsc.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_cinsActionPerformed
 
     private void eventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventosActionPerformed
         eventoInscribirme=new Inscripcion();
@@ -156,10 +157,10 @@ public class MenuAso extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cins;
     private javax.swing.JButton eventos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

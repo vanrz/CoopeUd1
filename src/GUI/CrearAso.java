@@ -7,7 +7,6 @@ package GUI;
 
 import DAO.AsociadoDAO;
 import DAO.FamiliarDAO;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +24,7 @@ public class CrearAso extends javax.swing.JFrame {
     private FamiliarDAO fdao= new FamiliarDAO();
     
     
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    
     private DefaultTableModel modelo;
     /**
      * Creates new form CrearAso1

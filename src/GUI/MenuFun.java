@@ -13,7 +13,7 @@ public class MenuFun extends javax.swing.JFrame {
 
     CrearAso c;
     ConsultaEvento consulta= new ConsultaEvento();
-    CrearEvento crearEvt= new CrearEvento();
+    CrearEvento crearEvt;
     Inscripcion insAso=new Inscripcion();
     Rol rolInicio=new Rol();
     /**
@@ -52,7 +52,7 @@ public class MenuFun extends javax.swing.JFrame {
         nombredelUsuario = new javax.swing.JLabel();
         codigoUsuario = new javax.swing.JLabel();
         crearAso = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        crearEve = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -79,10 +79,10 @@ public class MenuFun extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Crear Evento");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        crearEve.setText("Crear Evento");
+        crearEve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                crearEveActionPerformed(evt);
             }
         });
 
@@ -118,7 +118,7 @@ public class MenuFun extends javax.swing.JFrame {
                     .addComponent(crearAso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crearEve, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
@@ -153,7 +153,7 @@ public class MenuFun extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearAso)
-                    .addComponent(jButton2))
+                    .addComponent(crearEve))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -172,10 +172,11 @@ public class MenuFun extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_crearAsoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void crearEveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearEveActionPerformed
+        crearEvt= new CrearEvento();
         crearEvt.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_crearEveActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     rolInicio.setVisible(true);
@@ -198,7 +199,7 @@ public class MenuFun extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codigoUsuario;
     private javax.swing.JButton crearAso;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton crearEve;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
