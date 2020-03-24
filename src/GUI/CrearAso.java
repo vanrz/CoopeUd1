@@ -404,7 +404,7 @@ public class CrearAso extends javax.swing.JFrame {
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         // TODO add your handling code here:
-        /*try {
+        try {
         Asociado aso= asodao.getAso();
         aso.setK_persona(Integer.parseInt(id.getText()));
         aso.setF_nacimiento(fnam.getText());
@@ -425,7 +425,7 @@ public class CrearAso extends javax.swing.JFrame {
             Logger.getLogger(CrearAso.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        */
+        
         for(int i=0;i<modelo.getRowCount();i++){
             try {
             Familiar fam= fdao.getFam();
