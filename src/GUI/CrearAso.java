@@ -429,14 +429,14 @@ public class CrearAso extends javax.swing.JFrame {
         for(int i=0;i<modelo.getRowCount();i++){
             try {
             Familiar fam= fdao.getFam();
-            System.out.print(modelo.getValueAt(0, 5).toString());
-            fam.setF_nacimiento(modelo.getValueAt(0, 5).toString());
+            System.out.print(modelo.getValueAt(i, 5).toString());
+            fam.setF_nacimiento(modelo.getValueAt(i, 5).toString());
             fam.setK_familiar(Integer.parseInt(modelo.getValueAt(0, 2).toString()));
             fam.setK_persona(Integer.parseInt(id.getText()));
             fam.setN_pnombre(modelo.getValueAt(i, 0).toString());
-            fam.setN_papellido(modelo.getValueAt(0, 1).toString());
-            fam.setN_parentesco(modelo.getValueAt(0, 3).toString());
-            fam.setO_tipoidfam(modelo.getValueAt(0, 4).toString());
+            fam.setN_papellido(modelo.getValueAt(i, 1).toString());
+            fam.setN_parentesco(modelo.getValueAt(i, 3).toString());
+            fam.setO_tipoidfam(modelo.getValueAt(i, 4).toString());
             
             
                 fdao.AñadirFAmiliar();
