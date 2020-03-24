@@ -5,6 +5,8 @@
  */
 package GUI;
 
+
+
 /**
  *
  * @author vanRz
@@ -15,6 +17,7 @@ public class Rol extends javax.swing.JFrame {
      * Creates new form Ingresar
      */
     Inicio i = new Inicio();
+    
 
     public Rol() {
         super("Ventana de Inicio");
@@ -60,6 +63,8 @@ public class Rol extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAsociadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAsociadoActionPerformed
+            
+        
         i.setVisible(true);
         dispose();
     }//GEN-LAST:event_botonAsociadoActionPerformed

@@ -11,7 +11,7 @@ package GUI;
  */
 public class MenuFun extends javax.swing.JFrame {
 
-    CrearAso c=new CrearAso();
+    CrearAso c;
     ConsultaEvento consulta= new ConsultaEvento();
     CrearEvento crearEvt= new CrearEvento();
     Inscripcion insAso=new Inscripcion();
@@ -19,10 +19,21 @@ public class MenuFun extends javax.swing.JFrame {
     /**
      * Creates new form MenuFun1
      */
+    public MenuFun(int id, String nombre) {
+        super("Funcionario");
+        initComponents();
+         setLocationRelativeTo(null);
+        nombredelUsuario.setText(nombre);
+        codigoUsuario.setText(id+"");
+       
+    }
+    
     public MenuFun() {
         super("Funcionario");
         initComponents();
          setLocationRelativeTo(null);
+        
+       
     }
 
     /**
@@ -40,7 +51,7 @@ public class MenuFun extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         nombredelUsuario = new javax.swing.JLabel();
         codigoUsuario = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        crearAso = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -61,10 +72,10 @@ public class MenuFun extends javax.swing.JFrame {
 
         codigoUsuario.setText("jLabel6");
 
-        jButton1.setText("Crear Asociado");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        crearAso.setText("Crear Asociado");
+        crearAso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                crearAsoActionPerformed(evt);
             }
         });
 
@@ -104,7 +115,7 @@ public class MenuFun extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(crearAso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -141,7 +152,7 @@ public class MenuFun extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(crearAso)
                     .addComponent(jButton2))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -155,10 +166,11 @@ public class MenuFun extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void crearAsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearAsoActionPerformed
+        c=new CrearAso();
         c.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_crearAsoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         crearEvt.setVisible(true);
@@ -181,45 +193,11 @@ public class MenuFun extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuFun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuFun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuFun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuFun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuFun().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codigoUsuario;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton crearAso;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -9,6 +9,7 @@ import negocio.Asociado;
 import util.CaException;
 import util.ServiceLocator;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -16,7 +17,7 @@ import java.sql.*;
  */
 public class AsociadoDAO {
 
-    Asociado aso;
+    private Asociado aso;
 
     public AsociadoDAO() {
         aso = new Asociado();
@@ -58,8 +59,9 @@ public class AsociadoDAO {
     }
 
     public void AñadirAsociado() throws CaException {
+        
         try {
-            String stringSQL = "INSERT INTO Asociado VALUES (?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE)";
+            String stringSQL = "INSERT INTO \"Asociado\" (k_persona, n_npnombre, n_nsnombre, n_papellido, n_sapelido, f_nacimiento, o_tel, o_email, o_sexo, o_tipoid, v_sueldo, f_afiliacion) VALUES (?,?,?,?,?,?,?,?,?,?,?, CURRENT_DATE)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -68,17 +70,21 @@ public class AsociadoDAO {
             prepSta.setString(3, aso.getN_nsnombre());
             prepSta.setString(4, aso.getN_papellido());
             prepSta.setString(5, aso.getN_sapelido());
-            prepSta.setString(6, aso.getF_nacimiento());//yyyy-mm-dd
+            prepSta.setDate(6, java.sql.Date.valueOf(aso.getF_nacimiento()));//yyyy-mm-dd
             prepSta.setInt(7, aso.getO_tel());
             prepSta.setString(8, aso.getO_email());
             prepSta.setString(9, aso.getO_sexo());
             prepSta.setString(10, aso.getO_tipoid());
             prepSta.setInt(11, aso.getV_sueldo());
+            prepSta.executeUpdate();
+            prepSta.close();
+            ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
             throw new CaException("AsociadoDAO", "No se creó el usuario" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
+        
 
     }
 

@@ -46,7 +46,7 @@ public class ServiceLocator {
         try {
             String url = "jdbc:postgresql://localhost:5432/CoopeUD";
             String usuario = "postgres";
-            String password = "1585";
+            String password = "postgres2019";
             Class.forName("org.postgresql.Driver").newInstance();
             conexion = DriverManager.getConnection(url, usuario, password);
             conexion.setAutoCommit(false);

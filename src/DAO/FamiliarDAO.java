@@ -16,7 +16,15 @@ import java.sql.*;
  */
 public class FamiliarDAO {
 
-    Familiar fam;
+    private Familiar fam;
+
+    public Familiar getFam() {
+        return fam;
+    }
+
+    public void setFam(Familiar fam) {
+        this.fam = fam;
+    }
 
     public FamiliarDAO() {
 
@@ -25,7 +33,7 @@ public class FamiliarDAO {
 
     public void AñadirFAmiliar() throws CaException {
         try {
-            String stringSQL = "INSERT INTO Familiar VALUES (?,?,?,?,?,?,?,?,?)";
+            String stringSQL = "INSERT INTO \"Familiar\" (k_familiar, o_tipoidfam, n_pnombre, n_snombre, n_papellido, n_sapellido, f_nacimiento, n_parentesco, k_persona)VALUES (?,?,?,?,?,?,?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -35,9 +43,12 @@ public class FamiliarDAO {
             prepSta.setString(4, fam.getN_snombre());
             prepSta.setString(5, fam.getN_papellido());
             prepSta.setString(6, fam.getN_sapellido());
-            prepSta.setString(7, fam.getF_nacimiento());//yyyy-mm-dd
+            prepSta.setDate(7, java.sql.Date.valueOf(fam.getF_nacimiento()));//yyyy-mm-dd
             prepSta.setString(8, fam.getN_parentesco());
             prepSta.setInt(9, fam.getK_persona());
+            prepSta.executeUpdate();
+            prepSta.close();
+            ServiceLocator.getInstance().commit();
 
         } catch (SQLException e) {
             throw new CaException("FamiliarDAO", "No se creó el familiar" + e.getMessage());
