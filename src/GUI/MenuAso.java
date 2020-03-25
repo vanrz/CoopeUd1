@@ -13,7 +13,7 @@ public class MenuAso extends javax.swing.JFrame {
     misEventos miEvento;
      ConsultaInscripciones misInsc;
     InscripcionVista eventoInscribirme;
-    
+   int idaso; 
     
     /**
      * Creates new form MenuAso1
@@ -30,7 +30,7 @@ public class MenuAso extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         cod.setText(idaso+"");
-        
+        this.idaso=idaso;
     }
 
     /**
@@ -154,7 +154,8 @@ public class MenuAso extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cinsActionPerformed
-      misInsc=new ConsultaInscripciones();
+     int id=idaso;
+        misInsc=new ConsultaInscripciones(id);
         misInsc.setVisible(true);
         dispose();
     }//GEN-LAST:event_cinsActionPerformed

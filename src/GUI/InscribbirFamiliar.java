@@ -5,11 +5,13 @@
  */
 package GUI;
 
+import DAO.DetalleInscripcionDAO;
 import DAO.FamiliarDAO;
 import DAO.InscripcionDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import negocio.DetalleInscripcion;
 import negocio.Familiar;
 import negocio.Inscripcion;
 import util.CaException;
@@ -20,9 +22,11 @@ import util.CaException;
  */
 public class InscribbirFamiliar extends javax.swing.JFrame {
 
+    InscripcionVista volver;
     
     InscripcionDAO insdao= new InscripcionDAO();
     FamiliarDAO famdao= new FamiliarDAO();
+    DetalleInscripcionDAO detdao= new DetalleInscripcionDAO();
     int codeve;
     double valor;
     int idaso;
@@ -57,7 +61,9 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
         idfam = new javax.swing.JTextField();
         idins = new javax.swing.JTextField();
         verificar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        detallecod = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +83,14 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("SALIR");
+        salir.setText("SALIR");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("ID detalle:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,21 +107,25 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(idins, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(idfam, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(idfam, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(idins, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                                    .addComponent(detallecod))))))
                 .addContainerGap(74, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(verificar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(salir)
                 .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
@@ -121,15 +138,19 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel5)
                     .addComponent(idins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(detallecod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idfam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(verificar)
-                    .addComponent(jButton2))
+                    .addComponent(salir))
                 .addGap(53, 53, 53))
         );
 
@@ -139,27 +160,35 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
     private void verificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarActionPerformed
         // TODO add your handling code here: agregar despues si no se pudo inscribir dependiendo de l abase de datos el otro mensaje de vuelva a ingreasr los datos
         
-            Familiar fam=famdao.getFam();
+           Familiar fam=famdao.getFam();
            fam.setK_familiar(Integer.parseInt(idfam.getText()));
-           fam.setK_persona(0);
+           fam.setK_persona(idaso);
            
-        try {
-            //if(
-            famdao.BuscarFAmiliar();//==true){
-            /*    Inscripcion ins= insdao.getIns();
+         try {
+            if(famdao.BuscarFAmiliar()==true){
+            Inscripcion ins= insdao.getIns();
             ins.setK_ins(Integer.parseInt(idins.getText()));
-            ins.setF_ins("");
             ins.setI_asistencia("S");
             ins.setI_estado("S");
-            ins.setV_ins(0);
+            ins.setV_ins((int) valor);
             ins.setK_evento(codeve);
-            ins.setK_persona(Integer.parseInt(idfam.getText()));
+            ins.setK_persona(idaso);
             insdao.AñadirInscripcion();
+            
+            DetalleInscripcion det= detdao.getDetIns();
+            
+            det.setK_familiar(Integer.parseInt(idfam.getText()));
+            det.setK_identificacion(Integer.parseInt(detallecod.getText()));
+            det.setK_ins(Integer.parseInt(idins.getText()));
+            
+            detdao.AñadirDetalleIns();
+            
+            
             JOptionPane.showMessageDialog(null, "Familiar registrado");
             }
             else
             JOptionPane.showMessageDialog(null, "Familiar no encontrado");
-            */   
+               
         } catch (CaException ex) {
             Logger.getLogger(InscribbirFamiliar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -169,17 +198,26 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
         
     }//GEN-LAST:event_verificarActionPerformed
 
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        // TODO add your handling code here:
+        volver=new InscripcionVista(idaso);
+        volver.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_salirActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField detallecod;
     private javax.swing.JTextField idfam;
     private javax.swing.JTextField idins;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton salir;
     private javax.swing.JButton verificar;
     // End of variables declaration//GEN-END:variables
 }

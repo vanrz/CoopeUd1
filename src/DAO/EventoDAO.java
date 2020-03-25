@@ -110,7 +110,7 @@ public class EventoDAO {
         }  
         
         int cont=0;
-        try {
+       try {
             String stringSQL1= "SELECT \"Evento\".k_evento, \"Evento\".n_nombre, q_maxpart, \"Tipo\".n_nombre, f_fin, ((v_total/q_maxpart)*(1-(p_pago/100)))  FROM  \"Evento\", \"Caracteristica\", \"Tipo\" WHERE  \"Evento\".k_evento=\"Caracteristica\".k_evento AND \"Evento\".k_evento=\"Tipo\".k_evento";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL1);
@@ -119,12 +119,12 @@ public class EventoDAO {
              while(resultado.next()){
                  datos[0]= resultado.getString(1);
                  datos[1]= resultado.getString(2);
+                 datos[2]= resultado.getString(3);
                  do{
                      if(k_evento.get(cont)==Integer.parseInt(resultado.getString(1)))
-                         datos[2]= (Integer.parseInt(resultado.getString(3))-inscritos.get(cont)+"");
-                     else
-                         datos[2]= resultado.getString(3);
+                         datos[2]= (Integer.parseInt(resultado.getString(3))-inscritos.get(cont)+"");  
                       cont++;
+                      System.out.println(k_evento.size()+" "+cont);
                  }while(k_evento.size()>cont);            
                  
                  datos[3]= resultado.getString(4);
@@ -132,10 +132,13 @@ public class EventoDAO {
                  datos[5]=resultado.getString(6);
                  cont++;
                  modelo.addRow(datos);
+              cont=0;
              }
             
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            ServiceLocator.getInstance().liberarConexion();
         }
             
        
