@@ -160,7 +160,7 @@ public class Inicio extends javax.swing.JFrame {
             
             if(userDAO.BuscarUsuario()==true){
                 if(rol.getSelectedItem().toString().equals("funcionario")){
-                    MenuFun fun= new MenuFun(user.getK_idusuario(), "Camilo Torres");
+                    MenuFun fun= new MenuFun(user.getK_idusuario());
                     fun.setVisible(true);
                     
                 }

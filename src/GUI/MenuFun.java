@@ -12,18 +12,17 @@ package GUI;
 public class MenuFun extends javax.swing.JFrame {
 
     CrearAso c;
-    ConsultaEvento consulta= new ConsultaEvento();
+    ConsultaEvento consulta;
     CrearEvento crearEvt;
     InscripcionVista insAso;
     Rol rolInicio=new Rol();
     /**
      * Creates new form MenuFun1
      */
-    public MenuFun(int id, String nombre) {
+    public MenuFun(int id) {
         super("Funcionario");
         initComponents();
          setLocationRelativeTo(null);
-        nombredelUsuario.setText(nombre);
         codigoUsuario.setText(id+"");
        
     }
@@ -185,12 +184,13 @@ public class MenuFun extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        consulta= new ConsultaEvento(Integer.parseInt(codigoUsuario.getText()));
         consulta.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        insAso=new InscripcionVista(0);
+        insAso=new InscripcionVista(Integer.parseInt(codigoUsuario.getText()));
         insAso.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

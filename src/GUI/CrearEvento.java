@@ -15,7 +15,7 @@ import negocio.Evento;
 public class CrearEvento extends javax.swing.JFrame {
     
     EventoDAO evdao= new EventoDAO();
-
+ MenuFun inFunc=new MenuFun();
     /**
      * Creates new form CrearEvento
      */
@@ -136,6 +136,11 @@ public class CrearEvento extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         inscripcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "si", "no" }));
 
@@ -332,6 +337,12 @@ public class CrearEvento extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        inFunc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -23,7 +23,7 @@ public class CrearAso extends javax.swing.JFrame {
 
     private AsociadoDAO asodao= new AsociadoDAO();
     private FamiliarDAO fdao= new FamiliarDAO();
-    
+    MenuFun mfun= new MenuFun();
     
     
     private DefaultTableModel modelo;
@@ -211,6 +211,11 @@ public class CrearAso extends javax.swing.JFrame {
         });
 
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Fecha nacimiento:");
 
@@ -460,6 +465,12 @@ public class CrearAso extends javax.swing.JFrame {
        
         
     }//GEN-LAST:event_RegistrarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        mfun.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     
 
