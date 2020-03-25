@@ -9,7 +9,6 @@ import DAO.AsociadoDAO;
 import DAO.FamiliarDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.Asociado;
 import negocio.Familiar;
@@ -23,7 +22,7 @@ public class CrearAso extends javax.swing.JFrame {
 
     private AsociadoDAO asodao= new AsociadoDAO();
     private FamiliarDAO fdao= new FamiliarDAO();
-    MenuFun mfun= new MenuFun();
+    
     
     
     private DefaultTableModel modelo;
@@ -56,8 +55,6 @@ public class CrearAso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel15 = new javax.swing.JLabel();
-        tel1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -89,10 +86,6 @@ public class CrearAso extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         tipoid = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        contraseña = new javax.swing.JTextField();
-
-        jLabel15.setText("Telefono:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -211,19 +204,12 @@ public class CrearAso extends javax.swing.JFrame {
         });
 
         jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel14.setText("Fecha nacimiento:");
 
         tipoid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC", "CE" }));
 
         jLabel13.setText("tipo id:");
-
-        jLabel16.setText("Contraseña:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,8 +263,7 @@ public class CrearAso extends javax.swing.JFrame {
                                         .addGap(42, 42, 42)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel8)
-                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel16))))
+                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -290,8 +275,7 @@ public class CrearAso extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(tel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(fnam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(fnam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(26, 26, 26)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -351,9 +335,7 @@ public class CrearAso extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16)
-                            .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -438,7 +420,6 @@ public class CrearAso extends javax.swing.JFrame {
         else
             aso.setO_sexo("F");
         asodao.AñadirAsociado();
-        JOptionPane.showMessageDialog(null, "Registro exitoso");
         } catch (CaException ex) {
             Logger.getLogger(CrearAso.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -466,17 +447,10 @@ public class CrearAso extends javax.swing.JFrame {
         
     }//GEN-LAST:event_RegistrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        mfun.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Registrar;
-    private javax.swing.JTextField contraseña;
     private javax.swing.JTextField email;
     private javax.swing.JComboBox familiares;
     private javax.swing.JTextField fnam;
@@ -488,8 +462,6 @@ public class CrearAso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -508,7 +480,6 @@ public class CrearAso extends javax.swing.JFrame {
     private javax.swing.JTextField snombre;
     private javax.swing.JTextField sueldo;
     private javax.swing.JTextField tel;
-    private javax.swing.JTextField tel1;
     private javax.swing.JComboBox<String> tipoid;
     // End of variables declaration//GEN-END:variables
 }

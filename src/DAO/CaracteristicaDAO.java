@@ -23,14 +23,15 @@ public class CaracteristicaDAO {
         
         car= new Caracteristica();
     }
+    
     public void buscarCaracteristica() throws CaException {
         try {
-            String stringSQL = "SELECT * FROM Caracteristica WHERE k_evento = ?";//busqueda en sql
+            String stringSQL = "SELECT * FROM \"Caracteristica\" WHERE k_evento = ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
 
             prepSta.setInt(1, car.getK_evento());//reemplaza el interrogante por el valor
-
+            car.setK_evento(-1);
             ResultSet resultado = prepSta.executeQuery();//ejecuta el query y guarda el resultado
 
             while (resultado.next()) {
@@ -50,9 +51,9 @@ public class CaracteristicaDAO {
         }
     }
 
-    public void AñadirAsociado() throws CaException {
+    public void AñadirCopago() throws CaException {
         try {
-            String stringSQL = "INSERT INTO Caracteristica VALUES (?,?,?,?,?)";
+            String stringSQL = "INSERT INTO \"Caracteristica\" VALUES (?,?,?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -62,12 +63,43 @@ public class CaracteristicaDAO {
             prepSta.setInt(4, car.getQ_cuotas());
             prepSta.setInt(5, car.getV_copago());
          
+            prepSta.executeUpdate();
+            prepSta.close();
+            ServiceLocator.getInstance().commit();
+            
         } catch (SQLException e) {
-            throw new CaException("CarecteristicaDAO", "No se creó el copago del evento" + e.getMessage());
+            throw new CaException("CaracteristicaDAO", "No se creó el copago del evento" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
 
+    }
+    public void borrarCaracteristica() throws CaException {
+        try {
+            String stringSQL = "DELETE FROM \"Caracteristica\" WHERE k_evento= ?";//busqueda en sql
+            Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
+            PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
+
+            prepSta.setInt(1, car.getK_evento());
+
+            prepSta.executeUpdate();
+            prepSta.close();
+
+            ServiceLocator.getInstance().commit();
+        } catch (SQLException e) {
+            throw new CaException("CaracteristicaDAO", "No se eliminó el copago" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+
+
+    public Caracteristica getCar() {
+        return car;
+    }
+
+    public void setCar(Caracteristica car) {
+        this.car = car;
     }
 
     

@@ -26,6 +26,16 @@ public class Evento {
     private String n_nombre;
     private String o_observaciones ;
     private int q_maxpart ;
+    private int k_idtipo;
+
+    public int getK_idtipo() {
+        return k_idtipo;
+    }
+
+    public void setK_idtipo(int k_idtipo) {
+        this.k_idtipo = k_idtipo;
+    }
+    
 
     public int getK_evento() {
         return k_evento;

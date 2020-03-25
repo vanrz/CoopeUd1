@@ -57,32 +57,35 @@ public class FamiliarDAO {
         }
     }
 
-    public boolean BuscarFAmiliar() throws CaException {
+    public void BuscarFAmiliar() throws CaException {
         try {
-            String stringSQL = "SELECT k_familiar, k_persona FROM \"Familiar\" WHERE k_familiar = ? AND k_persona= ?";
+            String stringSQL = "SELECT * FROM Familiar WHERE k_familiar = ?";//busqueda en sql
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
-            PreparedStatement prepSta = conex.prepareStatement(stringSQL);
+            PreparedStatement prepSta = conex.prepareStatement(stringSQL);//prepara la busqueda del sql
 
-            prepSta.setInt(1, fam.getK_familiar());
-            prepSta.setInt(2, fam.getK_persona());
-            
-            ResultSet rs = prepSta.executeQuery();
-            
-            if (rs.next()){
-                return true;
+            prepSta.setInt(1, fam.getK_familiar());//reemplaza el interrogante por el valor
+
+            ResultSet resultado = prepSta.executeQuery();//ejecuta el query y guarda el resultado
+
+            while (resultado.next()) {
+
+                fam.setK_familiar(resultado.getInt(1));
+                fam.setO_tipoidfam(resultado.getString(2));
+                fam.setN_pnombre(resultado.getString(3));
+                fam.setN_snombre(resultado.getString(4));
+                fam.setN_papellido(resultado.getString(5));
+                fam.setN_sapellido(resultado.getString(6));
+                Date f_nacimiento = resultado.getDate(7);
+                fam.setF_nacimiento(f_nacimiento.toString());//yyyy-mm-dd
+                fam.setN_parentesco(resultado.getString(8));
+                fam.setK_persona(resultado.getInt(9));
+
             }
-            else{
-                return false;
-            }
-            
-        
         } catch (SQLException e) {
-            throw new CaException("UsuarioDAO", "error" + e.getMessage());
-            
+            throw new CaException("FamiliarDAO", "No se encontro el familiar" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
-        
     }
 
     public void BorrarFamiliar() throws CaException {
