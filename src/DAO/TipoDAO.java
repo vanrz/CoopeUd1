@@ -22,11 +22,13 @@ public class TipoDAO {
     public TipoDAO() {
         tip = new Tipo();
     }
+    
+    
 
 
     public void AñadirTipo() throws CaException {
         try {
-            String stringSQL = "INSERT INTO Tipo VALUES (?,?,?)";
+            String stringSQL = "INSERT INTO \"Tipo\" VALUES (?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -58,6 +60,14 @@ public class TipoDAO {
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
+    }
+
+    public Tipo getTip() {
+        return tip;
+    }
+
+    public void setTip(Tipo tip) {
+        this.tip = tip;
     }
 
 }

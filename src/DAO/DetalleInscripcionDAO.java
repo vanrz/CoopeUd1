@@ -19,15 +19,7 @@ import negocio.DetalleInscripcion;
  */
 public class DetalleInscripcionDAO {
 
-    private DetalleInscripcion detIns;
-
-    public DetalleInscripcion getDetIns() {
-        return detIns;
-    }
-
-    public void setDetIns(DetalleInscripcion detIns) {
-        this.detIns = detIns;
-    }
+    DetalleInscripcion detIns;
 
     public DetalleInscripcionDAO() {
 
@@ -36,16 +28,13 @@ public class DetalleInscripcionDAO {
     
     public void AñadirDetalleIns() throws CaException {
         try {
-            String stringSQL = "INSERT INTO \"DetalleInscripcion\" (k_identificacion, k_ins, k_familiar) VALUES (?,?,?)";
+            String stringSQL = "INSERT INTO DetalleInscripcion VALUES (?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
             prepSta.setInt(1, detIns.getK_identificacion());
             prepSta.setInt(2, detIns.getK_ins());
             prepSta.setInt(3, detIns.getK_familiar());
-            prepSta.executeUpdate();
-            prepSta.close();
-            ServiceLocator.getInstance().commit();
 
         } catch (SQLException e) {
             throw new CaException("AsociadoDAO", "No se creó el usuario" + e.getMessage());

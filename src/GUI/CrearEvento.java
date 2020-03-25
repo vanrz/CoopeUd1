@@ -6,16 +6,19 @@
 package GUI;
 
 import DAO.EventoDAO;
+import DAO.TipoDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import negocio.Evento;
+import negocio.Tipo;
+import util.CaException;
 
 /**
  *
  * @author vanRz
  */
 public class CrearEvento extends javax.swing.JFrame {
-    
-    EventoDAO evdao= new EventoDAO();
- MenuFun inFunc=new MenuFun();
+
     /**
      * Creates new form CrearEvento
      */
@@ -23,6 +26,7 @@ public class CrearEvento extends javax.swing.JFrame {
         super("Crear Evento");
         initComponents();
         setLocationRelativeTo(null);
+
     }
 
     /**
@@ -42,66 +46,79 @@ public class CrearEvento extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         nevento = new javax.swing.JTextField();
         idevento = new javax.swing.JTextField();
-        tipoEvento = new javax.swing.JComboBox();
         existeCopago = new javax.swing.JComboBox();
         vevento = new javax.swing.JTextField();
         asisMax = new javax.swing.JTextField();
-        proveedor = new javax.swing.JTextField();
         finicio = new javax.swing.JTextField();
         fcierre = new javax.swing.JTextField();
-        direccion = new javax.swing.JTextField();
         crear = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         inscripcion = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        numInscr = new javax.swing.JTextField();
+        tipoEvt = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lugarEvt = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        fechaCancel = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        fmaxInscr = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        boxSobrecupo = new javax.swing.JComboBox();
+        jLabel20 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descripcionArea = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        obserArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
         jLabel1.setText("EVENTOS COOPEUD");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 11, -1, -1));
 
         jLabel2.setText("Datos del evento");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, -1, -1));
 
         jLabel3.setText("Nombre del Evento:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 74, -1, -1));
 
         jLabel4.setText("ID Evento:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 105, -1, -1));
 
         jLabel5.setText("Tipo :");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 128, -1, -1));
 
         jLabel6.setText("Copago:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
 
         jLabel7.setText("Valor Total del Evento:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 74, -1, 20));
 
         jLabel8.setText("Asistencia Maxima:");
-
-        jLabel9.setText("Proveedor:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, -1, -1));
 
         jLabel10.setText("Fecha de inicio:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         jLabel11.setText("Fecha de Cierre:");
-
-        jLabel12.setText("Dirección:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
 
         nevento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 neventoActionPerformed(evt);
             }
         });
-
-        tipoEvento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Familiar", "Exclusivo", "Recreativo", "Cultural", "Infantil" }));
-        tipoEvento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoEventoActionPerformed(evt);
-            }
-        });
+        getContentPane().add(nevento, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 70, 217, 21));
+        getContentPane().add(idevento, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 102, 217, -1));
 
         existeCopago.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "si", "no" }));
         existeCopago.addActionListener(new java.awt.event.ActionListener() {
@@ -109,24 +126,23 @@ public class CrearEvento extends javax.swing.JFrame {
                 existeCopagoActionPerformed(evt);
             }
         });
+        getContentPane().add(existeCopago, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, -1, -1));
 
         vevento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 veventoActionPerformed(evt);
             }
         });
+        getContentPane().add(vevento, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 217, 20));
+        getContentPane().add(asisMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 70, -1));
 
         finicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 finicioActionPerformed(evt);
             }
         });
-
-        direccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                direccionActionPerformed(evt);
-            }
-        });
+        getContentPane().add(finicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 200, -1));
+        getContentPane().add(fcierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 200, -1));
 
         crear.setText("Crear");
         crear.addActionListener(new java.awt.event.ActionListener() {
@@ -134,153 +150,82 @@ public class CrearEvento extends javax.swing.JFrame {
                 crearActionPerformed(evt);
             }
         });
+        getContentPane().add(crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, -1, -1));
 
         jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, -1, -1));
 
         inscripcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "si", "no" }));
+        getContentPane().add(inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, -1, -1));
 
         jLabel13.setText("¿Tiene Inscripcion?");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
 
         jLabel14.setText("# Inscripciones: ");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        numInscr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                numInscrActionPerformed(evt);
             }
         });
+        getContentPane().add(numInscr, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 61, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(vevento)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(proveedor)
-                                .addComponent(direccion, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                                .addComponent(asisMax, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(fcierre, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                .addComponent(finicio))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(inscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(idevento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(nevento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(existeCopago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(87, 87, 87))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(145, 145, 145))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(crear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(83, 83, 83))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(nevento, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(idevento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(existeCopago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(vevento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(asisMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(finicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(fcierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear)
-                    .addComponent(jButton2))
-                .addGap(25, 25, 25))
-        );
+        tipoEvt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoEvtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tipoEvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 128, 217, -1));
+
+        jLabel15.setText("Descripcion: ");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        jLabel16.setText("Lugar:");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+        getContentPane().add(lugarEvt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 210, -1));
+
+        jLabel17.setText("Fecha Max Cancelacion:");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        getContentPane().add(fechaCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 200, -1));
+
+        jLabel18.setText("Fecha Max Inscripcion: ");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
+
+        fmaxInscr.setText("jTextField5");
+        fmaxInscr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fmaxInscrActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fmaxInscr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 200, -1));
+
+        jLabel12.setText("Observaciones:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
+
+        jLabel19.setText("¿Tiene sobrecupo?");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, -1, -1));
+
+        boxSobrecupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "si", "no" }));
+        boxSobrecupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSobrecupoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boxSobrecupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, -1, -1));
+
+        descripcionArea.setColumns(20);
+        descripcionArea.setRows(5);
+        jScrollPane1.setViewportView(descripcionArea);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 220, 70));
+
+        obserArea.setColumns(20);
+        obserArea.setRows(5);
+        jScrollPane2.setViewportView(obserArea);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -288,10 +233,6 @@ public class CrearEvento extends javax.swing.JFrame {
     private void existeCopagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existeCopagoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_existeCopagoActionPerformed
-
-    private void tipoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoEventoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipoEventoActionPerformed
 
     private void neventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_neventoActionPerformed
         // TODO add your handling code here:
@@ -305,44 +246,76 @@ public class CrearEvento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_finicioActionPerformed
 
-    private void direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_direccionActionPerformed
-
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
         // TODO add your handling code here:
-        Evento ev= evdao.getEvt();
-        ev.setF_cierre(fcierre.getText());
-        ev.setF_fin(fcierre.getText());
-        //ev.setF_inicio(f_inicio);
-        //ev.setF_maxcancel(f_maxcancel);
-        //ev.setF_maxins(f_maxins);
-        //ev.setI_estado(i_estado);
-        //ev.setI_sobrecupo(i_sobrecupo);
-        //ev.setI_tieneins(i_tie);
-        //ev.setK_evento(HEIGHT);
-        //ev.setN_descripcion(n_descripcion);
-        //ev.setN_lugar(n_lugar);
-        //ev.setN_nombre(n_nombre);
-        //ev.setO_observaciones(o_observaciones);
-        //ev.setQ_maxpart(ABORT);
-        //ev.setV_total(NORMAL);
-        if(existeCopago.getItemAt(existeCopago.getSelectedIndex())=="si"){
-            Estadistica e=new Estadistica();
-            e.setVisible(true);
+        try {
+
+            EventoDAO evdao = new EventoDAO();
+            Evento ev = evdao.getEvt();
+            TipoDAO tipDao = new TipoDAO();
+            Tipo tip = tipDao.getTip();
             
+            tip.setK_idtipo(Integer.parseInt(tipoEvt.getText()));
+            ev.setK_idtipo(Integer.parseInt(tipoEvt.getText()));
+            ev.setN_nombre(nevento.getText());
+            ev.setK_evento(Integer.parseInt(idevento.getText()));
+            ev.setI_estado("en proceso");
+            ev.setN_descripcion(descripcionArea.getText());
+            ev.setN_lugar(lugarEvt.getText());
+            ev.setF_inicio(finicio.getText());
+            ev.setF_cierre(fcierre.getText());
+            ev.setF_maxcancel(fechaCancel.getText());
+
+            if (inscripcion.getSelectedIndex() == 0) {
+                ev.setI_tieneins("S");
+            } else {
+                ev.setI_tieneins("N");
+            }
+
+            ev.setF_maxins(fmaxInscr.getText());
+            ev.setV_total(Integer.parseInt(vevento.getText()));
+            ev.setQ_maxpart(Integer.parseInt(numInscr.getText()));
+            ev.setO_observaciones(obserArea.getText());
+            ev.setF_fin(fcierre.getText());
+
+            if (boxSobrecupo.getSelectedIndex() == 0) {
+                ev.setI_sobrecupo("S");
+            } else {
+
+                ev.setI_sobrecupo("N");
+            }
+
+            evdao.setEvt(ev);
+
+            evdao.AñadirEvento();
+            if (existeCopago.getItemAt(existeCopago.getSelectedIndex()) == "si") {
+                CopagoCar e = new CopagoCar();
+                e.evento = ev;
+                e.setVisible(true);
+                dispose();
+            }
+        } catch (CaException ex) {
+            Logger.getLogger(CrearEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }//GEN-LAST:event_crearActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void numInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numInscrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_numInscrActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void boxSobrecupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSobrecupoActionPerformed
         // TODO add your handling code here:
-        inFunc.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_boxSobrecupoActionPerformed
+
+    private void fmaxInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fmaxInscrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fmaxInscrActionPerformed
+
+    private void tipoEvtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoEvtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoEvtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,11 +354,14 @@ public class CrearEvento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField asisMax;
+    private javax.swing.JComboBox boxSobrecupo;
     private javax.swing.JButton crear;
-    private javax.swing.JTextField direccion;
+    private javax.swing.JTextArea descripcionArea;
     private javax.swing.JComboBox existeCopago;
     private javax.swing.JTextField fcierre;
+    private javax.swing.JTextField fechaCancel;
     private javax.swing.JTextField finicio;
+    private javax.swing.JTextField fmaxInscr;
     private javax.swing.JTextField idevento;
     private javax.swing.JComboBox inscripcion;
     private javax.swing.JButton jButton2;
@@ -395,18 +371,26 @@ public class CrearEvento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField lugarEvt;
     private javax.swing.JTextField nevento;
-    private javax.swing.JTextField proveedor;
-    private javax.swing.JComboBox tipoEvento;
+    private javax.swing.JTextField numInscr;
+    private javax.swing.JTextArea obserArea;
+    private javax.swing.JTextField tipoEvt;
     private javax.swing.JTextField vevento;
     // End of variables declaration//GEN-END:variables
 }
