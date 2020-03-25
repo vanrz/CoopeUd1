@@ -14,13 +14,13 @@ import util.CaException;
  *
  * @author vanRz
  */
-public class Inscripcion extends javax.swing.JFrame {
-    InscribbirFamiliar iFamiliar=new InscribbirFamiliar();
+public class InscripcionVista extends javax.swing.JFrame {
+    InscribbirFamiliar iFamiliar;
     EventoDAO evdao= new EventoDAO();
     /**
      * Creates new form Inscripcion1
      */
-    public Inscripcion() {
+    public InscripcionVista(int idaso) {
         super("Inscripcion a Evento");
         initComponents();
         setLocationRelativeTo(null);
@@ -28,8 +28,10 @@ public class Inscripcion extends javax.swing.JFrame {
         try {
             tablita.setModel(evdao.mostrarEventos());
         } catch (CaException ex) {
-            Logger.getLogger(Inscripcion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InscripcionVista.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        caso.setText(idaso+"");
         
     }
 
@@ -47,7 +49,7 @@ public class Inscripcion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        caso = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -86,8 +88,8 @@ public class Inscripcion extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 58, -1, -1));
 
-        jLabel5.setText("jLabel5");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 78, -1, -1));
+        caso.setText("jLabel5");
+        getContentPane().add(caso, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 78, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jLabel6.setText("EVENTOS");
@@ -158,48 +160,20 @@ public class Inscripcion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnInscrFamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscrFamActionPerformed
-     iFamiliar.setVisible(true);
-        dispose();        // TODO add your handling code here:
+        int eve= tablita.getSelectedRow();
+        String codeve=tablita.getValueAt(eve, 0).toString();
+        String valeve=tablita.getValueAt(eve, 5).toString();
+        String fecha=tablita.getValueAt(eve, 4).toString();
+         iFamiliar=new InscribbirFamiliar(Integer.parseInt(caso.getText()),Integer.parseInt(codeve), Double.parseDouble(valeve), fecha);
+        iFamiliar.setVisible(true);
+        dispose();        
     }//GEN-LAST:event_btnInscrFamActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Inscripcion().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInscrFam;
+    private javax.swing.JLabel caso;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
@@ -207,7 +181,6 @@ public class Inscripcion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

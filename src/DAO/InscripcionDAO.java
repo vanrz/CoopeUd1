@@ -17,7 +17,15 @@ import java.sql.*;
  */
 public class InscripcionDAO {
 
-    Inscripcion ins;
+    private Inscripcion ins;
+
+    public Inscripcion getIns() {
+        return ins;
+    }
+
+    public void setIns(Inscripcion ins) {
+        this.ins = ins;
+    }
 
     public InscripcionDAO() {
 
@@ -26,7 +34,7 @@ public class InscripcionDAO {
 
     public void AñadirInscripcion() throws CaException {
         try {
-            String stringSQL = "INSERT INTO Inscripcion VALUES (?,?,?,?,?,?,?)";
+            String stringSQL = "INSERT INTO \"Inscripcion\" (k_ins, i_estado, f_ins, v_ins, i_asistencia, k_persona, k_evento) VALUES (?,?,?,?,?,?,?)";
             Connection conex = ServiceLocator.getInstance().tomarConexion();//conexion
             PreparedStatement prepSta = conex.prepareStatement(stringSQL);
 
@@ -37,7 +45,11 @@ public class InscripcionDAO {
             prepSta.setString(5, ins.getI_asistencia());
             prepSta.setInt(6, ins.getK_persona());
             prepSta.setInt(7, ins.getK_evento());
-
+            prepSta.executeUpdate();
+            prepSta.close();
+            ServiceLocator.getInstance().commit();
+            
+            
         } catch (SQLException e) {
             throw new CaException("InscripcionDAO", "No se creó la inscripcion" + e.getMessage());
         } finally {

@@ -165,7 +165,7 @@ public class Inicio extends javax.swing.JFrame {
                     
                 }
                 else{
-                    MenuAso aso= new MenuAso();
+                    MenuAso aso= new MenuAso(user.getK_idusuario());
                     aso.setVisible(true);
                   
                 }

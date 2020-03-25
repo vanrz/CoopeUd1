@@ -14,7 +14,7 @@ public class MenuFun extends javax.swing.JFrame {
     CrearAso c;
     ConsultaEvento consulta= new ConsultaEvento();
     CrearEvento crearEvt;
-    Inscripcion insAso=new Inscripcion();
+    InscripcionVista insAso;
     Rol rolInicio=new Rol();
     /**
      * Creates new form MenuFun1
@@ -190,6 +190,7 @@ public class MenuFun extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        insAso=new InscripcionVista(0);
         insAso.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

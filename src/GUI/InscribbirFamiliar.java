@@ -5,7 +5,14 @@
  */
 package GUI;
 
+import DAO.FamiliarDAO;
+import DAO.InscripcionDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import negocio.Familiar;
+import negocio.Inscripcion;
+import util.CaException;
 
 /**
  *
@@ -13,12 +20,24 @@ import javax.swing.JOptionPane;
  */
 public class InscribbirFamiliar extends javax.swing.JFrame {
 
+    
+    InscripcionDAO insdao= new InscripcionDAO();
+    FamiliarDAO famdao= new FamiliarDAO();
+    int codeve;
+    double valor;
+    int idaso;
+    String fecha;
+    
     /**
      * Creates new form ConfirmacionInscrip
      */
-    public InscribbirFamiliar() {
+    public InscribbirFamiliar(int idaso,int codeve, double valor, String fecha) {
         super("Confirmar Inscripcion");
         initComponents();
+        this.codeve=codeve;
+        this.idaso=idaso;
+        this.valor=valor;
+        this.fecha=fecha;
     }
 
     /**
@@ -35,9 +54,10 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        idfam = new javax.swing.JTextField();
+        idins = new javax.swing.JTextField();
+        verificar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,18 +68,16 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
 
         jLabel5.setText("Numero de Inscripcion:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TI", "CC", "PASAPORTE", "CEDULA EXTRANJERA" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TI", "CC", "CE" }));
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jButton1.setText("ACEPTAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        verificar.setText("ACEPTAR");
+        verificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                verificarActionPerformed(evt);
             }
         });
+
+        jButton2.setText("SALIR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,17 +96,20 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(idins, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jButton1)))
+                                .addComponent(idfam, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(74, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(verificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,69 +120,66 @@ public class InscribbirFamiliar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
-                .addComponent(jButton1)
-                .addContainerGap(113, Short.MAX_VALUE))
+                    .addComponent(idfam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(verificar)
+                    .addComponent(jButton2))
+                .addGap(53, 53, 53))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void verificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarActionPerformed
         // TODO add your handling code here: agregar despues si no se pudo inscribir dependiendo de l abase de datos el otro mensaje de vuelva a ingreasr los datos
-        JOptionPane.showMessageDialog(null, "Se ha inscrito sastifactoriamente");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
+            Familiar fam=famdao.getFam();
+           fam.setK_familiar(Integer.parseInt(idfam.getText()));
+           fam.setK_persona(0);
+           
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            //if(
+            famdao.BuscarFAmiliar();//==true){
+            /*    Inscripcion ins= insdao.getIns();
+            ins.setK_ins(Integer.parseInt(idins.getText()));
+            ins.setF_ins("");
+            ins.setI_asistencia("S");
+            ins.setI_estado("S");
+            ins.setV_ins(0);
+            ins.setK_evento(codeve);
+            ins.setK_persona(Integer.parseInt(idfam.getText()));
+            insdao.AñadirInscripcion();
+            JOptionPane.showMessageDialog(null, "Familiar registrado");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InscribbirFamiliar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InscribbirFamiliar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InscribbirFamiliar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InscribbirFamiliar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            else
+            JOptionPane.showMessageDialog(null, "Familiar no encontrado");
+            */   
+        } catch (CaException ex) {
+            Logger.getLogger(InscribbirFamiliar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
+        
+        
+        
+        
+    }//GEN-LAST:event_verificarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InscribbirFamiliar().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField idfam;
+    private javax.swing.JTextField idins;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton verificar;
     // End of variables declaration//GEN-END:variables
 }
